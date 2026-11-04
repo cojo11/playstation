@@ -8,8 +8,8 @@
             
             // 1. ABFRAGE: Handelt es sich um eine PlayStation 3?
             if (ua.match(/PLAYSTATION 3/i)) {
-                // Wenn PS3 erkannt wird, leite in den Ordner /ps3/ weiter
-                window.location.replace("/ps3/index.html");
+                // Relativer Pfad: Bleibt im aktuellen Projektordner
+                window.location.replace("ps3/index.html");
                 return;
             }
             
@@ -17,24 +17,23 @@
             const ps4Match = ua.match(/PlayStation\s+4[\/ ](\d+)\.(\d+)/);
             
             if (ps4Match) {
-                // Berechnet die Firmware-Version der PS4
                 var major = parseInt(ps4Match[1], 10);
-                var minor = parseInt(ps4Match[2], 16); // Hex-Umrechnung für korrekte Erkennung
+                var minor = parseInt(ps4Match[2], 16); 
                 var version = (major * 100) + minor;
                 
-                // Weiche für die PS4-Ordner
+                // Relative Weiche fÃ¼r die PS4-Unterordner
                 if (version >= 1350) {
-                    // Wenn PS4-Version 13.50 bis 14.00, gehe in den Ordner /14/
-                    window.location.replace("/14/index.html");
+                    // Geht in den Unterordner "14" innerhalb des Projekts
+                    window.location.replace("14/index.html");
                 } else {
-                    // Für alle älteren PS4-Versionen, gehe in den Ordner /ps4/
-                    window.location.replace("/ps4/index.html");
+                    // Geht in den Unterordner "ps4" innerhalb des Projekts
+                    window.location.replace("ps4/index.html");
                 }
                 return;
             }
             
-            // FALLBACK: Wenn weder PS3 noch PS4 erkannt werden (z.B. PC oder Smartphone)
-            document.body.innerHTML = "<h1>Keine unterstützte Konsole erkannt!</h1><p>Dein User-Agent: " + ua + "</p><br><p><a href='/ps3/' style='color:#7fd0a0;'>Zu den PS3-Dateien</a> | <a href='/ps4/' style='color:#7fd0a0;'>Zu den PS4-Dateien (alt)</a> | <a href='/14/' style='color:#7fd0a0;'>Zu den PS4-Dateien (14.00)</a></p>";
+            // FALLBACK fÃ¼r PC/Smartphone
+            document.body.innerHTML = "<h1>Keine unterstÃ¼tzte Konsole erkannt!</h1><p>Dein User-Agent: " + ua + "</p><br><p><a href='ps3/' style='color:#7fd0a0;'>Zu den PS3-Dateien</a> | <a href='ps4/' style='color:#7fd0a0;'>Zu den PS4-Dateien (alt)</a> | <a href='14/' style='color:#7fd0a0;'>Zu den PS4-Dateien (14.00)</a></p>";
         };
     </script>
 </head>
