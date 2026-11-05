@@ -1,0 +1,25 @@
+CACHE MANIFEST
+# resource-path-fix-20261021-main-v2
+# offline-manifests-v1-20261021
+# v4 - startup, AppCache and telemetry reliability 20261003
+
+CACHE:
+index.html
+jb.html
+cache.html
+../pspulse.png
+jb.js
+core.js
+mem.js
+int64.js
+rpc_worker.js
+ps4_offsets.js
+goldhen.bin
+patches/1302.bin
+patches/1350.bin
+patches/1352.bin
+
+jb.html?log=1
+
+NETWORK:
+*
