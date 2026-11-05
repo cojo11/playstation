@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Universal Console Exploit Router</title>
+    <style>
+        body { background-color: #0b0d10; color: #ffffff; font-family: sans-serif; text-align: center; padding-top: 5vh; margin: 0; }
+        .container { max-width: 700px; margin: 0 auto; padding: 20px; background: rgba(255, 255, 255, 0.03); border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); }
+        h1 { color: #0078ff; font-weight: 400; }
+        .countdown { font-size: 18px; color: #ff9d00; font-weight: bold; margin: 20px 0; background: rgba(255, 157, 0, 0.1); padding: 10px; border-radius: 6px; display: inline-block; }
+        .credits-box { text-align: left; margin-top: 20px; padding: 15px; background: rgba(0, 0, 0, 0.2); border-radius: 8px; border-left: 4px solid #0078ff; }
+        ul { list-style-type: none; padding-left: 0; }
+        li { padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 14px; }
+        .dev-work { color: #a0aec0; }
+    </style>
+    <script>
+        var seconds = 5;
+        var redirectUrl = "";
+
+        function startRouter() {
+            var ua = navigator.userAgent;
+            
+            // 1. ERKENNUNG: PlayStation 3
+            if (ua.match(/PLAYSTATION 3/i)) {
+                redirectUrl = "ps3/index.html";
+            } 
+            // 2. ERKENNUNG: PlayStation 4
+            else if (ua.match(/PlayStation\s+4/i)) {
+                if (ua.match(/12\.50/) || ua.match(/12\.5/)) {
+                    // Deine 12.50 geht in den stabilen psx8-Multi-Host-Ordner
+                    redirectUrl = "12/index.html";
+                } else if (ua.match(/14\.00/) || ua.match(/14\./)) {
+                    // Deine 14.00 geht direkt in das Afterglow-Paket
+                    redirectUrl = "14/index.html";
+                } else {
+                    // Fallback für alle anderen PS4-Firmwares
+                    redirectUrl = "12/index.html";
+                }
+            }
+
+            if (redirectUrl !== "") { 
+                countdownTimer(); 
+            } else {
+                document.getElementById("timer-box").innerHTML = "<br><a href='ps3/index.html' style='color:#0078ff;'>[PS3 Toolset]</a> | <a href='12/index.html' style='color:#0078ff;'>[PS4 12.50]</a> | <a href='14/index.html' style='color:#0078ff;'>[PS4 14.00]</a>";
+            }
+        }
+
+        function countdownTimer() {
+            if (seconds > 0) {
+                document.getElementById("timer-box").innerHTML = "Weiterleitung in " + seconds + " Sekunden...";
+                seconds--;
+                setTimeout(countdownTimer, 1000);
+            } else {
+                window.location.replace(redirectUrl);
+            }
+        }
+        window.onload = startRouter;
+    </script>
+</head>
+<body>
+<div class="container">
+    <h1>Universal Console Exploit Router</h1>
+    <div id="timer-box" class="countdown">Initialisiere Weiterleitung...</div>
+    <div class="credits-box">
+        <h3 style="color: #7fd0a0; margin-top:0;">❤️ Credits & Thanks to the Scene Developers</h3>
+        <ul>
+            <li>bguerville & Team <span class="dev-work">— PS3 NOR/NAND Toolset Framework</span></li>
+            <li>SiSTRo <span class="dev-work">— GoldHEN Enabler System Core</span></li>
+            <li>well0nez <span class="dev-work">— Afterglow Exploit Engine for FW 14.00</span></li>
+            <li>psx8 Developer Team <span class="dev-work">— Stable Multi-Firmware Host Core for FW 12.50</span></li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>
